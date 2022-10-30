@@ -23,6 +23,10 @@
           <router-link :to="'/comments/' + game.gid + '/' + game.h.tn + '/' + game.v.tn"><img
               src="../assets/comment.png" height="30" /></router-link>
         </td>
+        <td v-if="user.email == adminEmail">
+          <router-link :to="'/edit/' + game.gid + '/' + game.h.tn + '/' + game.v.tn"><img src="../assets/edit.png"
+              height="30" /></router-link>
+        </td>
       </tr>
     </table>
   </div>
@@ -36,6 +40,8 @@ export default {
     const auth0 = useAuth0()
     return {
       isAuthenticated: auth0.isAuthenticated,
+      user: auth0.user,
+      adminEmail: "admin@user.com",
       games: json
     }
   }

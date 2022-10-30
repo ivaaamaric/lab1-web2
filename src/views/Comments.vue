@@ -3,14 +3,14 @@
         <h2>Comments on {{ home }} vs. {{ visitor }}:</h2>
         <div v-for="comment in oldComments" :key="comment">
             <p>{{ comment.user }} said: {{ comment.comment }}
-                <img v-if="user.role == admin" @click="deleteComment(comment)"
-                    src="../assets/delete.png" height="25" />
+                <img v-if="user.email == adminEmail" @click="deleteComment(comment)" src="../assets/delete.png"
+                    height="25" />
             </p>
         </div>
         <div v-for="comment in allLocalComments?.filter((comment) => comment.gameId == this.$route.params.id)"
             :key="comment">
             <p>{{ comment.user }} said: {{ comment.comment }}
-                <img v-if="comment.user == user.name || user.role == admin" @click="deleteComment(comment)"
+                <img v-if="comment.user == user.name || user.email == adminEmail" @click="deleteComment(comment)"
                     src="../assets/delete.png" height="25" />
                 <img v-if="comment.user == user.name" @click="updateComment(comment)" src="../assets/edit.png"
                     height="25" />
@@ -18,9 +18,9 @@
         </div>
     </div>
     <div>
-        <textarea v-model="input" />
+        <textarea style="width:300px;" height="100" v-model="input" />
     </div>
-    <button @click="addComment(input)">Have your say</button>
+    <button class="btn btn-primary" @click="addComment(input)">Have your say</button>
 </template>
   
 <script>
@@ -38,7 +38,8 @@ export default {
             input: "",
             editingMode: false,
             editingComment: null,
-            user: auth0.user
+            user: auth0.user,
+            adminEmail: "admin@user.com"
         }
     },
     methods: {
@@ -66,7 +67,7 @@ export default {
             this.input = ""
         },
         deleteComment(comment) {
-            if (comment.user != this.user.name) {
+            if (comment.user != this.user.name || !this.isAdmin) {
                 return
             }
             var index = this.allLocalComments.indexOf(comment)
