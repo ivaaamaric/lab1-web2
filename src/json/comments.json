@@ -1,0 +1,44 @@
+{
+    "comments" : [
+    {
+        "gameId" : "0022200081",
+        "user" : "Ben",
+        "comment" : "One of the best games of the season so far"
+    },
+    {
+        "gameId" : "0022200077",
+        "user" : "Josh",
+        "comment" : "Had so much fun watching!"
+    },    
+    {
+        "gameId" : "0022200077",
+        "user" : "Harry",
+        "comment" : "The Bulls are the best"
+    },    
+    {
+        "gameId" : "0022200078",
+        "user" : "Luca",
+        "comment" : "Great game!"
+    },
+    {
+        "gameId" : "0022200078",
+        "user" : "Ally",
+        "comment" : "Boring game!"
+    },
+    {
+        "gameId" : "0022200079",
+        "user" : "Martin",
+        "comment" : "Woah! What a dunk!"
+    },
+    {
+        "gameId" : "0022200082",
+        "user" : "Garry",
+        "comment" : "Curry is the MVP!!!"
+    },
+    {
+        "gameId" : "0022200082",
+        "user" : "Susan",
+        "comment" : "Fun game!"
+    }
+    ]
+}
