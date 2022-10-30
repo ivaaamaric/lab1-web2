@@ -14,11 +14,6 @@ export function createRouter(app: App): Router {
         name: "home",
         component: Home
       },
-      // {
-      //   path: "/table",
-      //   name: "table",
-      //   component: Table
-      // },
       {
         path: "/profile",
         name: "profile",
