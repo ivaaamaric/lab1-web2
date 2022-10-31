@@ -3,16 +3,16 @@
         <h2>Comments on {{ home }} vs. {{ visitor }}:</h2>
         <div v-for="comment in oldComments" :key="comment">
             <p>{{ comment.user }} said: {{ comment.comment }}
-                <img v-if="user.email == adminEmail" @click="deleteComment(comment)" src="../assets/delete.png"
+                <img v-if="user?.email == adminEmail" @click="deleteComment(comment)" src="../assets/delete.png"
                     height="25" />
             </p>
         </div>
         <div v-for="comment in allLocalComments?.filter((comment) => comment.gameId == this.$route.params.id)"
             :key="comment">
             <p>{{ comment.user }} said: {{ comment.comment }}
-                <img v-if="comment.user == user.name || user.email == adminEmail" @click="deleteComment(comment)"
+                <img v-if="comment.user == user?.name || user?.email == adminEmail" @click="deleteComment(comment)"
                     src="../assets/delete.png" height="25" />
-                <img v-if="comment.user == user.name" @click="updateComment(comment)" src="../assets/edit.png"
+                <img v-if="comment.user == user?.name" @click="updateComment(comment)" src="../assets/edit.png"
                     height="25" />
             </p>
         </div>
@@ -24,12 +24,55 @@
 </template>
   
 <script>
-import json from '../json/comments.json'
 import { useAuth0 } from '@auth0/auth0-vue';
 
 export default {
     data() {
         const auth0 = useAuth0()
+        const json = {
+            "comments": [
+                {
+                    "gameId": "0022200081",
+                    "user": "Ben",
+                    "comment": "One of the best games of the season so far"
+                },
+                {
+                    "gameId": "0022200077",
+                    "user": "Josh",
+                    "comment": "Had so much fun watching!"
+                },
+                {
+                    "gameId": "0022200077",
+                    "user": "Harry",
+                    "comment": "The Bulls are the best"
+                },
+                {
+                    "gameId": "0022200078",
+                    "user": "Luca",
+                    "comment": "Great game!"
+                },
+                {
+                    "gameId": "0022200078",
+                    "user": "Ally",
+                    "comment": "Boring game!"
+                },
+                {
+                    "gameId": "0022200079",
+                    "user": "Martin",
+                    "comment": "Woah! What a dunk!"
+                },
+                {
+                    "gameId": "0022200082",
+                    "user": "Garry",
+                    "comment": "Curry is the MVP!!!"
+                },
+                {
+                    "gameId": "0022200082",
+                    "user": "Susan",
+                    "comment": "Fun game!"
+                }
+            ]
+        }
         return {
             home: this.$route.params.home,
             visitor: this.$route.params.visitor,
