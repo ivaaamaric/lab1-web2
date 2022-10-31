@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>Comments on {{ home }} vs. {{ visitor }}:</h2>
-        <div v-for="comment in oldComments" :key="comment">
+        <div v-for="comment in oldComments.filter((comment) => comment.gameId == this.$route.params.id)" :key="comment">
             <p>{{ comment.user }} said: {{ comment.comment }}
                 <img v-if="user?.email == adminEmail" @click="deleteComment(comment)" src="../assets/delete.png"
                     height="25" />
@@ -18,9 +18,9 @@
         </div>
     </div>
     <div>
-        <textarea style="width:300px;" height="100" v-model="input" />
+        <textarea v-if="user?.email != adminEmail" style="width:300px;" height="100" v-model="input" />
     </div>
-    <button class="btn btn-primary" @click="addComment(input)">Have your say</button>
+    <button class="btn btn-primary" v-if="user?.email != adminEmail" @click="addComment(input)">Have your say</button>
 </template>
   
 <script>
@@ -76,7 +76,7 @@ export default {
         return {
             home: this.$route.params.home,
             visitor: this.$route.params.visitor,
-            oldComments: json.comments.filter((comment) => comment.gameId == this.$route.params.id),
+            oldComments: json.comments,
             allLocalComments: JSON.parse(window.localStorage.getItem('comments')),
             input: "",
             editingMode: false,
@@ -110,7 +110,7 @@ export default {
             this.input = ""
         },
         deleteComment(comment) {
-            if (comment.user != this.user.name || !this.isAdmin) {
+            if (comment.user != this.user?.name && this.user?.email != this.adminEmail) {
                 return
             }
             var index = this.allLocalComments.indexOf(comment)
