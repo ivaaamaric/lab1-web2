@@ -113,7 +113,7 @@ export default {
             if (comment.user != this.user?.name && this.user?.email != this.adminEmail) {
                 return
             }
-            var index = this.allLocalComments.indexOf(comment)
+            var index = this.allLocalComments?.indexOf(comment)
             if (index > -1) {
                 this.allLocalComments.splice(index, 1)
                 const data = JSON.stringify(this.allLocalComments)
